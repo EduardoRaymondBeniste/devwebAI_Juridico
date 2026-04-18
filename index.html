@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevWebAI Turbo ADV - Inteligência Jurídica</title>
+<style>
+    /* 1. CONFIGURAÇÕES GERAIS */
+    html { scroll-behavior: smooth; }
+
+    body {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        padding-top: 80px;
+    }
+
+    h1, h2 { color: #1a2a6c; }
+
+    /* 2. HEADER E MENU */
+    .main-header {
+        width: 100%;
+        background-color: #ffffff;
+        padding: 15px 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo h1 { font-size: 1.4rem; margin: 0; font-weight: 800; color: #1a2a6c; }
+
+    /* MENU DESKTOP */
+    .main-nav { display: flex; align-items: center; gap: 30px; }
+
+    .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; }
+
+    .nav-links a { text-decoration: none; color: #555; font-weight: 500; transition: 0.3s; }
+
+    .nav-links a:hover { color: #4facfe; }
+
+    .btn-cta {
+        background: linear-gradient(45deg, #1a2a6c, #4facfe);
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+
+    /* MENU HAMBÚRGUER (ESCONDIDO NO DESKTOP) */
+    .hamburger {
+        display: none;
+        cursor: pointer;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        padding: 10px;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #1a2a6c;
+        border-radius: 3px;
+        transition: 0.3s;
+    }
+
+    /* 3. SECTION HERÓI */
+    .hero-section {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 60px 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .flex-container { display: flex; align-items: center; gap: 50px; }
+
+    .text-block { flex: 1.2; text-align: left; }
+
+    .text-block h1 { font-size: 2.5rem; line-height: 1.2; }
+
+    .round-image {
+        width: 100%;
+        max-width: 350px;
+        border-radius: 50%;
+        border: 8px solid #f4f7f6;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    /* 4. SEÇÃO EDUARDO RAYMOND BENISTE (CTO) */
+    .about-cto {
+        max-width: 1200px;
+        margin: 60px auto;
+        padding: 40px;
+        background-color: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        text-align: left;
+    }
+
+    .cto-header { border-bottom: 3px solid #1a2a6c; display: inline-block; margin-bottom: 20px; }
+
+    .tech-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin-top: 25px;
+    }
+
+    .tech-item {
+        background: #f8f9fa;
+        padding: 10px;
+        border-left: 4px solid #1a2a6c;
+        font-weight: bold;
+        color: #333;
+        font-size: 0.9rem;
+    }
+
+    /* 5. FORMULÁRIO */
+    .contact-container {
+        max-width: 650px;
+        margin: 60px auto;
+        background: #1a2a6c;
+        padding: 40px;
+        border-radius: 15px;
+        color: white;
+    }
+
+    .contact-form { display: flex; flex-direction: column; gap: 15px; text-align: left; }
+
+    .contact-form input, .contact-form select, .contact-form textarea {
+        padding: 12px; border-radius: 5px; border: none; width: 100%; box-sizing: border-box;
+    }
+
+    .btn-send {
+        background: #25d366; color: white; padding: 15px; border: none; border-radius: 5px;
+        font-weight: bold; cursor: pointer; font-size: 1.1rem; transition: 0.3s; width: 100%;
+    }
+
+    .footer { background: #1a2a6c; color: #ccc; padding: 40px; font-size: 0.9rem; }
+
+    /* 6. RESPONSIVIDADE (MOBILE) */
+    @media (max-width: 768px) {
+        .hamburger { display: flex; } /* Mostra o hambúrguer */
+
+        .main-nav {
+            position: fixed;
+            left: -100%; /* Escondido fora da tela */
+            top: 70px;
+            flex-direction: column;
+            background-color: #ffffff;
+            width: 100%;
+            height: auto;
+            padding: 30px 0;
+            box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+            transition: 0.4s;
+            z-index: 999;
+        }
+
+        .main-nav.active { left: 0; } /* Mostra quando ativo */
+
+        .nav-links { flex-direction: column; width: 100%; align-items: center; margin-bottom: 20px; }
+
+        .flex-container { flex-direction: column; text-align: center; }
+        
+        .text-block { text-align: center; }
+        
+        .text-block h1 { font-size: 2rem; }
+    }
+</style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo"><h1>DevWebAI ADV</h1></div>
+            
+            <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="main-nav" id="main-nav">
+                <ul class="nav-links">
+                    <li><a href="#inicio" onclick="toggleMenu()">Início</a></li>
+                    <li><a href="#sobre" onclick="toggleMenu()">Eduardo Beniste</a></li>
+                    <li><a href="#contato" onclick="toggleMenu()">Contato</a></li>
+                </ul>
+                <a href="#contato" class="btn-cta" onclick="toggleMenu()">Consultoria Grátis</a>
+            </nav>
+        </div> 
+    </header>
+
+    <section class="hero-section" id="inicio">
+        <div class="flex-container">
+            <div class="text-block">
+                <h1>Engenharia de Software Jurídica.</h1>
+                <p>Código real, escalável e seguro para escritórios que buscam alta performance operacional.</p>
+                <a href="#sobre" style="color: #1a2a6c; font-weight: bold; text-decoration: none;">Ver perfil técnico do CTO →</a>
+            </div>
+            <div class="image-block">
+                <img src="celular.png" alt="Sistemas DevWebAI" class="round-image">
+            </div>
+        </div> 
+    </section>
+
+    <section class="about-cto" id="sobre">
+        <div class="cto-header">
+            <h2>Eduardo Raymond Beniste</h2>
+        </div>
+        <h3>CTO & Desenvolvedor Full Stack</h3>
+        <p>
+            Especialista em desenvolvimento de sistemas, Eduardo lidera a <strong>DevWebAI</strong> com foco em programação robusta. Ele escreve e arquitetura cada projeto utilizando o ecossistema <strong>JavaScript</strong> profissional.
+        </p>
+        <p>
+            Ambiente de trabalho: <strong>Node.js</strong>, <strong>Express</strong>, banco de dados <strong>MySQL</strong> gerenciado via <strong>WampServer</strong> e produtividade extrema com <strong>VS Code</strong>.
+        </p>
+        
+        <div class="tech-list">
+            <div class="tech-item">JavaScript (ES6+)</div>
+            <div class="tech-item">Node.js</div>
+            <div class="tech-item">Express.js</div>
+            <div class="tech-item">MySQL</div>
+            <div class="tech-item">HTML5 / CSS3</div>
+            <div class="tech-item">WampServer</div>
+            <div class="tech-item">VS Code</div>
+            <div class="tech-item">AI APIs</div>
+        </div>
+    </section>
+
+    <section class="contact-container" id="contato">
+        <h2>Solicitar Orçamento</h2>
+        <p>Inicie seu projeto agora via WhatsApp com o CTO.</p>
+        
+        <form class="contact-form" onsubmit="enviarWhatsApp(event)">
+            <label>Nome:</label>
+            <input type="text" id="nome" placeholder="Seu nome" required>
+
+            <label>WhatsApp:</label>
+            <input type="tel" id="telefone" placeholder="(21) 99733-2750" required>
+
+            <label>Serviço:</label>
+            <select id="servico">
+                <option value="Sistemas Customizados">Sistemas Customizados</option>
+                <option value="Automação Node.js">Automação Node.js</option>
+                <option value="Portal Jurídico">Portal Jurídico</option>
+            </select>
+
+            <label>Sua mensagem:</label>
+            <textarea id="mensagem" rows="4" placeholder="Detalhes do seu projeto..."></textarea>
+
+            <button type="submit" class="btn-send">🚀 Iniciar Conversa no WhatsApp</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 DevWebAI ADV Turbo - Rio de Janeiro</p>
+        <p>Desenvolvido com código por Eduardo Raymond Beniste.</p>
+    </footer>
+
+    <script>
+        // Função para abrir e fechar o menu hambúrguer
+        function toggleMenu() {
+            const nav = document.getElementById('main-nav');
+            const hamburger = document.getElementById('hamburger');
+            
+            nav.classList.toggle('active');
+            
+            // Pequena animação no ícone do hambúrguer (opcional)
+            hamburger.classList.toggle('open');
+        }
+
+        // Função do WhatsApp
+        function enviarWhatsApp(event) {
+            event.preventDefault();
+            const nome = document.getElementById('nome').value;
+            const zap = document.getElementById('telefone').value;
+            const servico = document.getElementById('servico').value;
+            const msg = document.getElementById('mensagem').value;
+
+            const texto = `*CONTATO SITE DEVWEBAI*%0A%0A*Nome:* ${nome}%0A*WhatsApp:* ${zap}%0A*Serviço:* ${servico}%0A*Mensagem:* ${msg}`;
+            const numero = "5521997332750";
+            window.open(`https://wa.me/${numero}?text=${texto}`, '_blank');
+        }
+    </script>
+
+</body>
+</html>
